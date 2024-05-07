@@ -45,10 +45,11 @@ app.frame('/', async (c) => {
   })
 })
 
+// @ts-ignore
 app.frame('/fetch-data', async (c) => {
   const { inputText, frameData } = c;
   const { fid } = frameData;
-  console.log('farcaster id', frameData)
+  //console.log('farcaster id', frameData)
   if (inputText) {
     try {
       const response = await fetch(`https://www.duolingo.com/2017-06-30/users?username=${inputText}`, {
@@ -78,8 +79,8 @@ app.frame('/fetch-data', async (c) => {
         const fullLanguage = languageData[language_learning]?.name || 'Other'; // Default to globe if country code not found
         const fullLanguagefrom = languageData[language_learning_from]?.name || 'Other'; // Default to globe if country code not found
         
-        console.log('name', languageData[language_learning]?.name);        
-        console.log('streak num: ', streak_num);
+        //console.log('name', languageData[language_learning]?.name);        
+        //console.log('streak num: ', streak_num);
 
         // insert data
         try {
@@ -111,8 +112,8 @@ app.frame('/fetch-data', async (c) => {
                       <Text size="32" color="Humpback">Total XP: {total_xp} 🌟</Text>
                       <Text size="24" color="Fox">Streak Rank: {userRank} of {rankings.length}</Text>
                       {(() => {
-                        console.log('streak num:', userRank);
-                        console.log('num', rankings.length);
+                        //console.log('streak num:', userRank);
+                        //console.log('num', rankings.length);
                         const percentage = (userRank / rankings.length * 100);
                         let displayText = '';
                         if (percentage <= 0.1) {
