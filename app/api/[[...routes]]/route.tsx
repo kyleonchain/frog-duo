@@ -50,7 +50,7 @@ interface UserData {
 const app = new Frog({
   ui: { vars },
   assetsPath: '/',
-  basePath: '/',
+  basePath: '/start',
   hub: pinata(),
 })
 
