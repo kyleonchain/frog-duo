@@ -1,4 +1,13 @@
-export const languageData = {
+type LanguageInfo = {
+  flag: string;
+  name: string;
+};
+
+type LanguageData = {
+  [key: string]: LanguageInfo;
+};
+
+export const languageData: LanguageData = {
     'EN': { flag: '🇺🇸', name: 'English' },
     'ES': { flag: '🇪🇸', name: 'Spanish' }, 
     'FR': { flag: '🇫🇷', name: 'French' },

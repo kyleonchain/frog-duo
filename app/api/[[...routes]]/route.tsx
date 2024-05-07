@@ -10,6 +10,43 @@ import { pinata } from 'frog/hubs'
 import { upsertUserData } from './dbUtils'
 import { displayRankings } from './rankingsUtils'
 
+interface Streak {
+  startDate: string;
+  endDate: string;
+  length: number;
+}
+
+interface StreakData {
+  currentStreak: Streak;
+}
+
+interface Course {
+  preload: boolean;
+  placementTestAvailable: boolean;
+  authorId: string;
+  title: string;
+  learningLanguage: string;
+  xp: number;
+  healthEnabled: boolean;
+  fromLanguage: string;
+  crowns: number;
+  id: string;
+}
+
+interface User {
+  streakData: StreakData;
+  picture: string;
+  learningLanguage: string;
+  fromLanguage: string;
+  creationDate: number;
+  totalXp: number;
+  courses: Course[];
+}
+
+interface UserData {
+  users: User[];
+}
+
 const app = new Frog({
   ui: { vars },
   assetsPath: '/',
@@ -47,7 +84,7 @@ app.frame('/', async (c) => {
 
 app.frame('/fetch-data', async (c) => {
   const { inputText, frameData } = c;
-  const { fid } = frameData;
+  const fid = (frameData as any).fid;
   //console.log('farcaster id', frameData)
   if (inputText) {
     try {
@@ -57,7 +94,7 @@ app.frame('/fetch-data', async (c) => {
         }
       });
       if (response.ok) {
-        const userData = await response.json();
+        const userData = await response.json() as UserData;
         const startDate = new Date(userData.users[0].streakData.currentStreak.startDate);
         const endDate = new Date(userData.users[0].streakData.currentStreak.endDate);
         const formattedStartDate = `${startDate.toLocaleString('default', { month: 'long' })} ${startDate.getDate()}, ${startDate.getFullYear()}`;
