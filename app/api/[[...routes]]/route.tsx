@@ -155,7 +155,7 @@ app.frame('/fetch-data', async (c) => {
   }
 });
 
-devtools(app, { serveStatic });
+//devtools(app, { serveStatic });
 
 export const GET = handle(app);
 export const POST = handle(app);
