@@ -50,7 +50,7 @@ interface UserData {
 const app = new Frog({
   ui: { vars },
   assetsPath: '/',
-  basePath: '/api',
+  basePath: '/',
   hub: pinata(),
 })
 
@@ -66,7 +66,7 @@ app.frame('/', async (c) => {
       >
         <HStack gap="4">
           <VStack>
-            <Heading>Duolingo Stats Farcaster Frame</Heading>
+            <Heading>Duolingo </Heading>
             <Text color="FeatherGreen" size="24">
               Check your language learning stats and see where your streak ranks against other Duo users on Farcaster!
             </Text>
