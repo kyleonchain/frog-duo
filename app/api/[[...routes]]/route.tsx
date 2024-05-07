@@ -45,7 +45,6 @@ app.frame('/', async (c) => {
   })
 })
 
-// @ts-ignore
 app.frame('/fetch-data', async (c) => {
   const { inputText, frameData } = c;
   const { fid } = frameData;
@@ -87,7 +86,19 @@ app.frame('/fetch-data', async (c) => {
           // Insert or update the database
           await upsertUserData(fid, inputText, streak_num, total_xp, fullLanguage, fullLanguagefrom, joined_date);
         } catch (error) {
-          console.error('Failed to upsert user data:', error);
+          return c.res({
+            image: (
+              <Box grow alignVertical="center" backgroundColor="background" padding="32">
+                <VStack gap="4">
+                  <Heading color="FeatherGreen">Error</Heading>
+                  <Text size="20">Failed to fetch data</Text>
+                </VStack>
+              </Box>
+            ),
+            intents: [
+              <Button action="/">Try Again</Button>
+            ]
+          });
         }
         
         // get streak rank
@@ -143,7 +154,7 @@ app.frame('/fetch-data', async (c) => {
         image: (
           <Box grow alignVertical="center" backgroundColor="background" padding="32">
             <VStack gap="4">
-              <Heading color="FeatherGreen"> Duolingo Streak </Heading>
+              <Heading color="FeatherGreen"> Duolingo Stats Farcaster Frame </Heading>
               <Text size="20"> {error_msg}  </Text>
             </VStack>
           </Box>
@@ -154,6 +165,19 @@ app.frame('/fetch-data', async (c) => {
       });
     }
   }
+  // Add a default response if none of the conditions are met
+  return c.res({
+    image: (
+      <Box grow alignVertical="center" backgroundColor="background" padding="32">
+        <VStack gap="4">
+          <Heading color="FeatherGreen"> Duolingo Stats Farcaster Frame </Heading>
+        </VStack>
+      </Box>
+    ),
+    intents: [
+      <Button action="/">Enter Username Again</Button>
+    ]
+  });
 });
 
 //devtools(app, { serveStatic });
